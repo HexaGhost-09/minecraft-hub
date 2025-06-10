@@ -11,14 +11,14 @@ async function getNeonCounts(): Promise<Record<string, number>> {
     const text = await res.text();
     throw new Error(`API error: ${res.status}\n${text}`);
   }
-  let data: any[];
+  let data: { apk_name: string; version: string; count: number }[];
   try {
     data = await res.json();
-  } catch (err) {
+  } catch {
     throw new Error("API did not return valid JSON (is your /api/download route working?)");
   }
   return Object.fromEntries(
-    data.map((row: any) => [`${row.apk_name}:${row.version}`, row.count])
+    data.map((row) => [`${row.apk_name}:${row.version}`, row.count])
   );
 }
 
@@ -31,6 +31,16 @@ type ApkAsset = {
   totalDownloadCount: number;
 };
 
+type GithubRelease = {
+  tag_name: string;
+  prerelease: boolean;
+  assets: {
+    name: string;
+    browser_download_url: string;
+    download_count?: number;
+  }[];
+};
+
 async function getApks(): Promise<{ beta?: ApkAsset; stable?: ApkAsset }> {
   // Fetch from GitHub
   const releasesRes = await fetch(
@@ -40,13 +50,13 @@ async function getApks(): Promise<{ beta?: ApkAsset; stable?: ApkAsset }> {
   if (!releasesRes.ok) {
     throw new Error("GitHub Releases API error");
   }
-  const releases = await releasesRes.json();
+  const releases: GithubRelease[] = await releasesRes.json();
 
   // Fetch from Neon
   let neonCounts: Record<string, number> = {};
   try {
     neonCounts = await getNeonCounts();
-  } catch (err) {
+  } catch {
     neonCounts = {};
   }
 
@@ -55,7 +65,7 @@ async function getApks(): Promise<{ beta?: ApkAsset; stable?: ApkAsset }> {
 
   for (const release of releases) {
     const apkAsset = release.assets.find(
-      (asset: { name: string; browser_download_url: string }) =>
+      (asset) =>
         asset.name.endsWith(".apk")
     );
     if (!apkAsset) continue;
@@ -90,8 +100,8 @@ export default async function Home() {
     const result = await getApks();
     beta = result.beta;
     stable = result.stable;
-  } catch (err: any) {
-    error = err?.message || "Unknown error";
+  } catch (e) {
+    error = (e instanceof Error) ? e.message : "Unknown error";
   }
 
   return (
