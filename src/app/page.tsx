@@ -76,7 +76,7 @@ export default async function Home() {
             download
           >
             <span className="text-2xl">✔️</span>
-            Stable {stable ? `(v${stable.version})` : ""}
+            Stable {stable ? `(${stable.version})` : ""}
           </a>
           <a
             href={beta?.url ?? "#"}
@@ -86,7 +86,7 @@ export default async function Home() {
             download
           >
             <span className="text-2xl">🧪</span>
-            Beta {beta ? `(v${beta.version})` : ""}
+            Beta {beta ? `(${beta.version})` : ""}
           </a>
         </div>
         {/* Release Notes */}
