@@ -10,6 +10,17 @@ type ApkAsset = {
 
 type Status = "up" | "partial" | "down";
 
+type GithubReleaseAsset = {
+  name: string;
+  browser_download_url: string;
+};
+
+type GithubRelease = {
+  tag_name: string;
+  prerelease: boolean;
+  assets: GithubReleaseAsset[];
+};
+
 const SITE_HISTORY_KEY = "siteStatusHistory";
 
 async function getApkStatus(): Promise<{
@@ -27,15 +38,14 @@ async function getApkStatus(): Promise<{
       return { status: "down", error: `GitHub API Error: ${res.status}` };
     }
 
-    const releases: any[] = await res.json();
+    const releases: GithubRelease[] = await res.json();
 
     let beta: ApkAsset | undefined;
     let stable: ApkAsset | undefined;
 
     for (const release of releases) {
       const apkAsset = release.assets.find(
-        (asset: { name: string; browser_download_url: string }) =>
-          asset.name.endsWith(".apk")
+        (asset) => asset.name.endsWith(".apk")
       );
       if (!apkAsset) continue;
 
@@ -53,7 +63,7 @@ async function getApkStatus(): Promise<{
     if (beta && stable) return { status: "up", beta, stable };
     if (beta || stable) return { status: "partial", beta, stable };
     return { status: "down", error: "No APKs found." };
-  } catch (e: unknown) {
+  } catch (e) {
     let msg = "Unknown error";
     if (typeof e === "object" && e !== null && "message" in e) {
       msg = String((e as { message?: string }).message ?? msg);
@@ -65,8 +75,6 @@ async function getApkStatus(): Promise<{
 // Check if site is up (returns "up" or "down")
 async function checkSiteStatus(): Promise<Status> {
   try {
-    // We can't really check the actual response due to no-cors,
-    // so we just assume "up" if fetch doesn't throw.
     await fetch("https://the-minecraft-hub.netlify.app/", {
       mode: "no-cors",
       cache: "no-store",
