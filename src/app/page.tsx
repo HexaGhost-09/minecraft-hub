@@ -1,90 +1,43 @@
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
-import { DownloadButton } from "./DownloadButton";
-
-// Helper to fetch Neon counts
-async function getNeonCounts(): Promise<Record<string, number>> {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "";
-  const res = await fetch(`${baseUrl}/api/download`, { next: { revalidate: 60 } });
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`API error: ${res.status}\n${text}`);
-  }
-  let data: { apk_name: string; version: string; count: number }[];
-  try {
-    data = await res.json();
-  } catch {
-    throw new Error("API did not return valid JSON (is your /api/download route working?)");
-  }
-  return Object.fromEntries(
-    data.map((row) => [`${row.apk_name}:${row.version}`, row.count])
-  );
-}
 
 type ApkAsset = {
   url: string;
   name: string;
   version: string;
-  githubDownloadCount: number;
-  siteDownloadCount: number;
-  totalDownloadCount: number;
-};
-
-type GithubRelease = {
-  tag_name: string;
-  prerelease: boolean;
-  assets: {
-    name: string;
-    browser_download_url: string;
-    download_count?: number;
-  }[];
 };
 
 async function getApks(): Promise<{ beta?: ApkAsset; stable?: ApkAsset }> {
-  // Fetch from GitHub
-  const releasesRes = await fetch(
+  // Fetch releases from your repo
+  const res = await fetch(
     "https://api.github.com/repos/HexaGhost-09/minecraft-hub/releases",
-    { next: { revalidate: 60 } }
+    { next: { revalidate: 60 } } // cache for 1 min
   );
-  if (!releasesRes.ok) {
-    throw new Error("GitHub Releases API error");
-  }
-  const releases: GithubRelease[] = await releasesRes.json();
-
-  // Fetch from Neon
-  let neonCounts: Record<string, number> = {};
-  try {
-    neonCounts = await getNeonCounts();
-  } catch {
-    neonCounts = {};
-  }
+  const releases = await res.json();
 
   let beta: ApkAsset | undefined;
   let stable: ApkAsset | undefined;
 
   for (const release of releases) {
     const apkAsset = release.assets.find(
-      (asset) =>
+      (asset: { name: string; browser_download_url: string }) =>
         asset.name.endsWith(".apk")
     );
     if (!apkAsset) continue;
-
-    const key = `${apkAsset.name}:${release.tag_name}`;
-    const siteDownloadCount = neonCounts[key] ?? 0;
-    const githubDownloadCount = apkAsset.download_count ?? 0;
 
     const apkData: ApkAsset = {
       url: apkAsset.browser_download_url,
       name: apkAsset.name,
       version: release.tag_name,
-      githubDownloadCount,
-      siteDownloadCount,
-      totalDownloadCount: githubDownloadCount + siteDownloadCount,
     };
 
-    if (!beta && release.prerelease) beta = apkData;
-    if (!stable && !release.prerelease) stable = apkData;
+    // Set beta as the latest pre-release, stable as the latest non-pre-release
+    if (!beta && release.prerelease) {
+      beta = apkData;
+    }
+    if (!stable && !release.prerelease) {
+      stable = apkData;
+    }
     if (beta && stable) break;
   }
 
@@ -92,17 +45,7 @@ async function getApks(): Promise<{ beta?: ApkAsset; stable?: ApkAsset }> {
 }
 
 export default async function Home() {
-  let beta: ApkAsset | undefined = undefined;
-  let stable: ApkAsset | undefined = undefined;
-  let error: string | null = null;
-
-  try {
-    const result = await getApks();
-    beta = result.beta;
-    stable = result.stable;
-  } catch (e) {
-    error = (e instanceof Error) ? e.message : "Unknown error";
-  }
+  const { beta, stable } = await getApks();
 
   return (
     <main className="min-h-screen w-full bg-gradient-to-tr from-[#1e293b] via-[#2563eb] to-[#22d3ee] flex items-center justify-center p-4">
@@ -125,57 +68,29 @@ export default async function Home() {
         <p className="text-lg md:text-xl text-cyan-100 text-center mb-4">
           Download the latest Minecraft APKs below!
         </p>
-        {/* Error */}
-        {error && (
-          <div className="text-red-200 bg-red-900/60 border border-red-400/30 rounded-lg p-4 mb-4 w-full text-center">
-            <strong>Error:</strong> {error}
-          </div>
-        )}
         {/* Download Buttons */}
-        {!error && (
-          <div className="flex flex-col md:flex-row gap-4 w-full justify-center">
-            <DownloadButton
-              apk_name={stable?.name ?? ""}
-              version={stable?.version ?? ""}
-              url={stable?.url ?? "#"}
-              className={`flex-1 inline-flex flex-col items-center justify-center gap-1 bg-green-500/80 hover:bg-green-400/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 ${
-                !stable ? "opacity-60 pointer-events-none" : ""
-              }`}
-              disabled={!stable}
-            >
-              <span className="text-2xl">✔️</span>
-              Stable {stable ? `(${stable.version})` : ""}
-              {stable && (
-                <span className="text-xs font-normal text-cyan-100 mt-1">
-                  📥 {stable.totalDownloadCount.toLocaleString()} downloads
-                  <span className="block text-[11px] text-cyan-300">
-                    (GitHub: {stable.githubDownloadCount.toLocaleString()}, Site: {stable.siteDownloadCount.toLocaleString()})
-                  </span>
-                </span>
-              )}
-            </DownloadButton>
-            <DownloadButton
-              apk_name={beta?.name ?? ""}
-              version={beta?.version ?? ""}
-              url={beta?.url ?? "#"}
-              className={`flex-1 inline-flex flex-col items-center justify-center gap-1 bg-yellow-400/80 hover:bg-yellow-300/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 ${
-                !beta ? "opacity-60 pointer-events-none" : ""
-              }`}
-              disabled={!beta}
-            >
-              <span className="text-2xl">🧪</span>
-              Beta {beta ? `(${beta.version})` : ""}
-              {beta && (
-                <span className="text-xs font-normal text-cyan-100 mt-1">
-                  📥 {beta.totalDownloadCount.toLocaleString()} downloads
-                  <span className="block text-[11px] text-cyan-300">
-                    (GitHub: {beta.githubDownloadCount.toLocaleString()}, Site: {beta.siteDownloadCount.toLocaleString()})
-                  </span>
-                </span>
-              )}
-            </DownloadButton>
-          </div>
-        )}
+        <div className="flex flex-col md:flex-row gap-4 w-full justify-center">
+          <a
+            href={stable?.url ?? "#"}
+            className={`flex-1 inline-flex items-center justify-center gap-2 bg-green-500/80 hover:bg-green-400/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 ${
+              !stable ? "opacity-60 pointer-events-none" : ""
+            }`}
+            download
+          >
+            <span className="text-2xl">✔️</span>
+            Stable {stable ? `(${stable.version})` : ""}
+          </a>
+          <a
+            href={beta?.url ?? "#"}
+            className={`flex-1 inline-flex items-center justify-center gap-2 bg-yellow-400/80 hover:bg-yellow-300/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 ${
+              !beta ? "opacity-60 pointer-events-none" : ""
+            }`}
+            download
+          >
+            <span className="text-2xl">🧪</span>
+            Beta {beta ? `(${beta.version})` : ""}
+          </a>
+        </div>
         {/* APK History Button */}
         <Link
           href="/timeline"
