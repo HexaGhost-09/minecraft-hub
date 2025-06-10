@@ -17,25 +17,28 @@ async function getApks(): Promise<{ beta?: ApkAsset; stable?: ApkAsset }> {
   let beta: ApkAsset | undefined;
   let stable: ApkAsset | undefined;
 
-  // Find most recent (beta) and previous (stable) APKs
-  for (const [i, release] of releases.entries()) {
+  for (const release of releases) {
     const apkAsset = release.assets.find((asset: any) =>
       asset.name.endsWith(".apk")
     );
-    if (apkAsset) {
-      const apkData: ApkAsset = {
-        url: apkAsset.browser_download_url,
-        name: apkAsset.name,
-        version: release.tag_name,
-      };
-      if (!beta) {
-        beta = apkData;
-      } else if (!stable) {
-        stable = apkData;
-        break;
-      }
+    if (!apkAsset) continue;
+
+    const apkData: ApkAsset = {
+      url: apkAsset.browser_download_url,
+      name: apkAsset.name,
+      version: release.tag_name,
+    };
+
+    // Set beta as the latest pre-release, stable as the latest non-pre-release
+    if (!beta && release.prerelease) {
+      beta = apkData;
     }
+    if (!stable && !release.prerelease) {
+      stable = apkData;
+    }
+    if (beta && stable) break;
   }
+
   return { beta, stable };
 }
 
