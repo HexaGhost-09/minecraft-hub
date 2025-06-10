@@ -18,8 +18,9 @@ async function getApks(): Promise<{ beta?: ApkAsset; stable?: ApkAsset }> {
   let stable: ApkAsset | undefined;
 
   for (const release of releases) {
-    const apkAsset = release.assets.find((asset: any) =>
-      asset.name.endsWith(".apk")
+    const apkAsset = release.assets.find(
+      (asset: { name: string; browser_download_url: string }) =>
+        asset.name.endsWith(".apk")
     );
     if (!apkAsset) continue;
 
@@ -70,7 +71,7 @@ export default async function Home() {
         <div className="flex flex-col md:flex-row gap-4 w-full justify-center">
           <a
             href={stable?.url ?? "#"}
-            className={`flex-1 inline-flex items-center justify-center gap-2 bg-green-500/80 hover:bg-green-400/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 border border-white/20 ${
+            className={`flex-1 inline-flex items-center justify-center gap-2 bg-green-500/80 hover:bg-green-400/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 ${
               !stable ? "opacity-60 pointer-events-none" : ""
             }`}
             download
@@ -80,7 +81,7 @@ export default async function Home() {
           </a>
           <a
             href={beta?.url ?? "#"}
-            className={`flex-1 inline-flex items-center justify-center gap-2 bg-yellow-400/80 hover:bg-yellow-300/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 border border-white/20 ${
+            className={`flex-1 inline-flex items-center justify-center gap-2 bg-yellow-400/80 hover:bg-yellow-300/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 ${
               !beta ? "opacity-60 pointer-events-none" : ""
             }`}
             download
