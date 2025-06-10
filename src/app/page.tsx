@@ -91,6 +91,13 @@ export default async function Home() {
             Beta {beta ? `(${beta.version})` : ""}
           </a>
         </div>
+        {/* APK History Button */}
+        <Link
+          href="/timeline"
+          className="mt-2 text-xs px-4 py-2 bg-cyan-800/80 hover:bg-cyan-700/90 text-cyan-100 rounded-full transition-all border border-cyan-300/30 shadow-sm"
+        >
+          📜 APK History
+        </Link>
         {/* Release Notes */}
         <div className="w-full bg-white/10 rounded-xl p-4 mt-4 border border-white/10">
           <h2 className="font-bold text-cyan-100 mb-2 text-lg">Latest updates</h2>
