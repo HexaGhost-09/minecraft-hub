@@ -27,7 +27,7 @@ async function getApkStatus(): Promise<{
       return { status: "down", error: `GitHub API Error: ${res.status}` };
     }
 
-    const releases = await res.json();
+    const releases: any[] = await res.json();
 
     let beta: ApkAsset | undefined;
     let stable: ApkAsset | undefined;
@@ -53,20 +53,26 @@ async function getApkStatus(): Promise<{
     if (beta && stable) return { status: "up", beta, stable };
     if (beta || stable) return { status: "partial", beta, stable };
     return { status: "down", error: "No APKs found." };
-  } catch (e: any) {
-    return { status: "down", error: e.message || "Unknown error" };
+  } catch (e: unknown) {
+    let msg = "Unknown error";
+    if (typeof e === "object" && e !== null && "message" in e) {
+      msg = String((e as { message?: string }).message ?? msg);
+    }
+    return { status: "down", error: msg };
   }
 }
 
 // Check if site is up (returns "up" or "down")
 async function checkSiteStatus(): Promise<Status> {
   try {
-    const res = await fetch("https://the-minecraft-hub.netlify.app/", {
+    // We can't really check the actual response due to no-cors,
+    // so we just assume "up" if fetch doesn't throw.
+    await fetch("https://the-minecraft-hub.netlify.app/", {
       mode: "no-cors",
       cache: "no-store",
     });
     return "up";
-  } catch (e) {
+  } catch {
     return "down";
   }
 }
