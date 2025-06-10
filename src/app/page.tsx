@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type ApkAsset = {
   url: string;
@@ -121,6 +122,9 @@ export default async function Home() {
             >
               GitHub
             </a>
+            <Link href="/status" className="hover:underline">
+              Status
+            </Link>
           </div>
           <span>
             Made with <span className="text-pink-400">❤</span> by HexaGhost-09
