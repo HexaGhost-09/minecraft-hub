@@ -19,7 +19,7 @@ export function DownloadButton({ apk_name, version, url, className, children, di
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ apk_name, version }),
       });
-    } catch (err) {
+    } catch {
       // Optionally show an error
     }
     // Trigger the file download
