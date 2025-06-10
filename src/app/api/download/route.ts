@@ -5,11 +5,8 @@ const sql = neon(process.env.DATABASE_URL!);
 
 export async function POST(req: NextRequest) {
   try {
-    console.log("Received POST to /api/download"); // Add logging
-    const body = await req.json();
-    console.log("Received body:", body); // Log request body
+    const { apk_name, version } = await req.json();
 
-    const { apk_name, version } = body;
     if (!apk_name || !version) {
       return NextResponse.json({ error: "Missing apk_name or version" }, { status: 400 });
     }
@@ -31,9 +28,12 @@ export async function POST(req: NextRequest) {
     `;
 
     return NextResponse.json({ success: true });
-  } catch (error: any) {
-    console.error("Error in POST /api/download:", error); // Log errors
-    return NextResponse.json({ error: error.message || "Unknown error" }, { status: 500 });
+  } catch (error: unknown) {
+    let message = "Unknown error";
+    if (error && typeof error === "object" && "message" in error) {
+      message = String((error as { message?: string }).message);
+    }
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
 
@@ -41,7 +41,11 @@ export async function GET() {
   try {
     const rows = await sql`SELECT apk_name, version, count FROM downloads;`;
     return NextResponse.json(rows);
-  } catch (error: any) {
-    return NextResponse.json({ error: error.message || "Unknown error" }, { status: 500 });
+  } catch (error: unknown) {
+    let message = "Unknown error";
+    if (error && typeof error === "object" && "message" in error) {
+      message = String((error as { message?: string }).message);
+    }
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
