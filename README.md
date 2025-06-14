@@ -62,25 +62,9 @@ English
 
 ---
 
-## 🤝 Contributing
-
-Contributions are welcome!
-
-- Check out [CONTRIBUTING.md](https://github.com/HexaGhost-09/minecraft-hub/blob/main/CONTRIBUTING.md) for guidelines.
-- Help translate the project! (See the `translations/` directory.)
-
----
-
 ## ⭐️ Star History
 
 [![Star History Chart](https://api.star-history.com/svg?repos=HexaGhost-09/minecraft-hub&type=Timeline)](https://star-history.com/#HexaGhost-09/minecraft-hub&Timeline)
-
----
-
-## 🧱 Credits
-
-- Inspired by [Seal](https://github.com/JunkFood02/Seal) and [yt-dlp](https://github.com/yt-dlp/yt-dlp) release automation.
-- Banner and logo by contributors. UI powered by [Next.js](https://nextjs.org/).
 
 ---
 
