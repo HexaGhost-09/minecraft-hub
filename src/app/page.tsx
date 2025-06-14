@@ -1,6 +1,8 @@
+import Footer from "@/app/components/Footer";
+import ApkHistoryButton from "@/app/components/ApkHistoryButton";
+import HomeHeader from "@/app/components/HomeHeader";
 import Image from "next/image";
 import Link from "next/link";
-import Footer from "@/app/components/Footer";
 
 type ApkAsset = {
   url: string;
@@ -49,24 +51,7 @@ export default async function Home() {
   return (
     <main className="min-h-screen w-full bg-gradient-to-tr from-[#1e293b] via-[#2563eb] to-[#22d3ee] flex items-center justify-center p-4">
       <div className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl shadow-2xl max-w-lg w-full px-8 py-12 flex flex-col items-center gap-6">
-        {/* Logo */}
-        <div className="mb-2">
-          <Image
-            src="https://i.rj1.dev/NUSvRMK"
-            alt="Minecraft Hub Logo"
-            width={96}
-            height={96}
-            className="rounded-xl drop-shadow-2xl"
-            priority
-          />
-        </div>
-        {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-extrabold text-white text-center tracking-tight drop-shadow-lg">
-          Minecraft Hub
-        </h1>
-        <p className="text-lg md:text-xl text-cyan-100 text-center mb-4">
-          Download the latest Minecraft APKs below!
-        </p>
+        <HomeHeader />
         {/* Download Buttons */}
         <div className="flex flex-col md:flex-row gap-4 w-full justify-center">
           <a
@@ -90,13 +75,7 @@ export default async function Home() {
             Beta {beta ? `(${beta.version})` : ""}
           </a>
         </div>
-        {/* APK History Button */}
-        <Link
-          href="/timeline"
-          className="mt-2 text-xs px-4 py-2 bg-cyan-800/80 hover:bg-cyan-700/90 text-cyan-100 rounded-full transition-all border border-cyan-300/30 shadow-sm"
-        >
-          📜 APK History
-        </Link>
+        <ApkHistoryButton />
         {/* Release Notes */}
         <div className="w-full bg-white/10 rounded-xl p-4 mt-4 border border-white/10">
           <h2 className="font-bold text-cyan-100 mb-2 text-lg">Latest updates</h2>
@@ -109,7 +88,6 @@ export default async function Home() {
             </li>
           </ul>
         </div>
-        {/* Footer */}
         <Footer />
       </div>
     </main>
