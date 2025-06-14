@@ -6,10 +6,10 @@ export default function HomeHeader() {
       {/* Logo */}
       <div className="mb-2">
         <Image
-          src="https://i.rj1.dev/NUSvRMK"
+          src="https://ik.imagekit.io/dy44khd73/logo.jpg?updatedAt=1749897563233"
           alt="Minecraft Hub Logo"
-          width={96}
-          height={96}
+          width={250}
+          height={250}
           className="rounded-xl drop-shadow-2xl"
           priority
         />
