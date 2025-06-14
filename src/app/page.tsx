@@ -1,7 +1,7 @@
 import Footer from "@/app/components/Footer";
 import ApkHistoryButton from "@/app/components/ApkHistoryButton";
 import HomeHeader from "@/app/components/HomeHeader";
-import Link from "next/link";
+import WebViewButton from "@/app/components/WebViewButton";
 
 type ApkAsset = {
   url: string;
@@ -75,13 +75,8 @@ export default async function Home() {
           </a>
         </div>
         <ApkHistoryButton />
-        {/* New button for Live Webpages */}
-        <Link
-          href="/pages/liveweb"
-          className="w-full mt-2 px-4 py-3 rounded-xl bg-cyan-800/80 hover:bg-cyan-700/90 text-cyan-100 border border-cyan-300/30 shadow-md text-lg font-semibold text-center transition-all"
-        >
-          🌐 View Our Webpages
-        </Link>
+        {/* MainButton component */}
+        <WebViewButton />
         {/* Release Notes */}
         <div className="w-full bg-white/10 rounded-xl p-4 mt-4 border border-white/10">
           <h2 className="font-bold text-cyan-100 mb-2 text-lg">Latest updates</h2>
