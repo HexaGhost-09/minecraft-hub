@@ -1,6 +1,8 @@
 <div align="center">
 
-<img src="public/icon.png" width="160" height="160" align="center" alt="Minecraft Hub Logo">
+<a href="/">
+  <img src="https://i.rj1.dev/NUSvRMK" width="160" height="160" align="center" alt="Minecraft Hub Logo">
+</a>
 
 # Minecraft Hub
 
