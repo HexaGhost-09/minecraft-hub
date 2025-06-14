@@ -20,6 +20,13 @@
 
 ---
 
+## 🌐 Live Websites
+
+- **Main Website:** [https://the-minecraft-hub.netlify.app](https://the-minecraft-hub.netlify.app)
+- **Beta Website:** [https://beta--the-minecraft-hub.netlify.app](https://beta--the-minecraft-hub.netlify.app)
+
+---
+
 ## 📱 Screenshots
 
 <div align="center">
