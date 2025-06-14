@@ -15,133 +15,109 @@ export default function LiveWebPage() {
           ← Back to Home
         </Link>
       </div>
-      <h1 className="text-3xl font-bold text-white mb-6">
-        Our Webpages
-      </h1>
-      <div className="w-full max-w-2xl grid md:grid-cols-2 gap-6 mb-10">
+      <div className="w-full max-w-2xl flex flex-col md:flex-row md:items-center md:justify-start mb-10">
+        <h1 className="text-5xl md:text-6xl font-extrabold text-white mb-8 md:mb-0 md:mr-12 text-left">
+          Our Webpages
+        </h1>
+      </div>
+      <div className="w-full max-w-2xl grid md:grid-cols-2 gap-8 mb-10">
         {/* Main Website Widget */}
         <div className="bg-white/10 border border-cyan-400/30 rounded-xl shadow-lg p-4 flex flex-col items-center">
-          <h2 className="text-lg font-semibold text-cyan-100 mb-2">Main</h2>
-          <Link
-            href="https://the-minecraft-hub.netlify.app"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mb-2 w-full flex justify-center"
-          >
-            <span className="inline-block px-4 py-2 rounded-lg bg-cyan-700 hover:bg-cyan-500 text-white font-semibold transition-all shadow-md">
-              Preview
-            </span>
-          </Link>
+          <h2 className="w-full text-2xl font-bold text-cyan-100 mb-4 text-left">Main</h2>
           <div
-            className="w-full rounded-lg overflow-hidden border border-cyan-300/20 bg-slate-900/30 relative group"
+            className="w-full rounded-lg overflow-hidden border border-cyan-300/20 bg-slate-900/30"
             style={{
-              height: 400,
-              pointerEvents: "none", // disables all interaction inside
-              touchAction: "none",
+              width: "100%",
+              aspectRatio: "16/9",
+              maxWidth: "360px",
+              minWidth: "220px",
+              margin: "0 auto",
+              pointerEvents: "none",
               userSelect: "none",
+              height: "auto",
             }}
             tabIndex={-1}
             aria-disabled="true"
           >
-            <div
-              className="absolute inset-0 z-10"
-              style={{
-                pointerEvents: "auto",
-                background:
-                  "rgba(30,41,59,0.7) linear-gradient(135deg,rgba(59,130,246,0.07) 0%,rgba(45,212,191,0.05) 100%)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                fontWeight: 600,
-                fontSize: "1.2rem",
-                letterSpacing: 1,
-                textShadow: "0 2px 12px rgba(0,0,0,0.22)",
-                opacity: 1,
-                cursor: "not-allowed",
-              }}
-            >
-              Live Preview (not interactive)
-            </div>
             <iframe
               src="https://the-minecraft-hub.netlify.app"
               title="Main Website Live Preview"
               width="100%"
               height="100%"
-              className="w-full h-full filter blur-[2px] scale-95 contrast-125 pointer-events-none select-none"
               style={{
+                aspectRatio: "16/9",
+                width: "100%",
+                height: "202px",
                 pointerEvents: "none",
-                touchAction: "none",
                 userSelect: "none",
-                filter: "blur(2px) grayscale(0.12) brightness(0.95)",
+                border: "none",
+                filter: "grayscale(0.06) brightness(0.93) contrast(1.12)",
               }}
+              className="w-full"
               loading="lazy"
               tabIndex={-1}
               aria-disabled="true"
             />
           </div>
-        </div>
-        {/* Beta Website Widget */}
-        <div className="bg-white/10 border border-yellow-400/30 rounded-xl shadow-lg p-4 flex flex-col items-center">
-          <h2 className="text-lg font-semibold text-yellow-100 mb-2">Beta</h2>
           <Link
-            href="https://beta--the-minecraft-hub.netlify.app"
+            href="https://the-minecraft-hub.netlify.app"
             target="_blank"
             rel="noopener noreferrer"
-            className="mb-2 w-full flex justify-center"
+            className="mt-5 w-full flex justify-center"
           >
-            <span className="inline-block px-4 py-2 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-semibold transition-all shadow-md">
+            <span className="inline-block w-full px-6 py-3 rounded-lg bg-cyan-700 hover:bg-cyan-500 text-white font-bold text-lg transition-all shadow-md text-center">
               Preview
             </span>
           </Link>
+        </div>
+        {/* Beta Website Widget */}
+        <div className="bg-white/10 border border-yellow-400/30 rounded-xl shadow-lg p-4 flex flex-col items-center">
+          <h2 className="w-full text-2xl font-bold text-yellow-100 mb-4 text-left">Beta</h2>
           <div
-            className="w-full rounded-lg overflow-hidden border border-yellow-300/20 bg-slate-900/30 relative group"
+            className="w-full rounded-lg overflow-hidden border border-yellow-300/20 bg-slate-900/30"
             style={{
-              height: 400,
+              width: "100%",
+              aspectRatio: "16/9",
+              maxWidth: "360px",
+              minWidth: "220px",
+              margin: "0 auto",
               pointerEvents: "none",
-              touchAction: "none",
               userSelect: "none",
+              height: "auto",
             }}
             tabIndex={-1}
             aria-disabled="true"
           >
-            <div
-              className="absolute inset-0 z-10"
-              style={{
-                pointerEvents: "auto",
-                background:
-                  "rgba(153,130,0,0.09) linear-gradient(135deg,rgba(253,224,71,0.13) 0%,rgba(250,204,21,0.08) 100%)",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                color: "#fff",
-                fontWeight: 600,
-                fontSize: "1.2rem",
-                letterSpacing: 1,
-                textShadow: "0 2px 12px rgba(0,0,0,0.22)",
-                opacity: 1,
-                cursor: "not-allowed",
-              }}
-            >
-              Live Preview (not interactive)
-            </div>
             <iframe
               src="https://beta--the-minecraft-hub.netlify.app"
               title="Beta Website Live Preview"
               width="100%"
               height="100%"
-              className="w-full h-full filter blur-[2px] scale-95 contrast-125 pointer-events-none select-none"
               style={{
+                aspectRatio: "16/9",
+                width: "100%",
+                height: "202px",
                 pointerEvents: "none",
-                touchAction: "none",
                 userSelect: "none",
-                filter: "blur(2px) grayscale(0.12) brightness(0.95)",
+                border: "none",
+                filter: "grayscale(0.06) brightness(0.93) contrast(1.12)",
               }}
+              className="w-full"
               loading="lazy"
               tabIndex={-1}
               aria-disabled="true"
             />
           </div>
+          <Link
+            href="https://beta--the-minecraft-hub.netlify.app"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-5 w-full flex justify-center"
+          >
+            <span className="inline-block w-full px-6 py-3 rounded-lg bg-yellow-500 hover:bg-yellow-400 text-slate-900 font-bold text-lg transition-all shadow-md text-center">
+              Preview
+            </span>
+          </Link>
         </div>
       </div>
       <Footer />
