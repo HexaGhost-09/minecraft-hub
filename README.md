@@ -1,7 +1,7 @@
 <div align="center">
 
 <a href="/">
-  <img src="https://the-minecraft-hub.netlify.app/_next/image?url=https%3A%2F%2Fi.rj1.dev%2FNUSvRMK&w=256&q=75" width="160" height="160" align="center" alt="Minecraft Hub Logo">
+  <img src="https://ik.imagekit.io/dy44khd73/logo.jpg?updatedAt=1749897563233" width="160" height="160" align="center" alt="Minecraft Hub Logo">
 </a>
 
 # Minecraft Hub
@@ -23,9 +23,8 @@
 ## 📱 Screenshots
 
 <div align="center">
-  <img src="public/screenshots/1.png" width="30%" />
-  <img src="public/screenshots/2.png" width="30%" />
-  <img src="public/screenshots/3.png" width="30%" />
+  <img src="https://ik.imagekit.io/dy44khd73/The%20Minecraft%20Hub/Screenshot_2025-06-14-16-10-41-488-edit_com.android.chrome.jpg?updatedAt=1749897734862" width="30%" />
+  <img src="https://ik.imagekit.io/dy44khd73/The%20Minecraft%20Hub/Screenshot_2025-06-14-16-11-26-409-edit_com.android.chrome.jpg?updatedAt=1749897740996" width="30%" />
   <!-- Add more screenshots as needed -->
 </div>
 
