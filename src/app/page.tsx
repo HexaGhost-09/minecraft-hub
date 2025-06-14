@@ -1,6 +1,7 @@
 import Footer from "@/app/components/Footer";
 import ApkHistoryButton from "@/app/components/ApkHistoryButton";
 import HomeHeader from "@/app/components/HomeHeader";
+import Link from "next/link";
 
 type ApkAsset = {
   url: string;
@@ -54,7 +55,7 @@ export default async function Home() {
         <div className="flex flex-col md:flex-row gap-4 w-full justify-center">
           <a
             href={stable?.url ?? "#"}
-            className={`flex-1 inline-flex items-center justify-center gap-2 bg-green-500/80 hover:bg-green-400/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 ${
+            className={`flex-1 inline-flex items-center justify-center gap-2 bg-green-500/80 hover:bg-green-400/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-150 ${
               !stable ? "opacity-60 pointer-events-none" : ""
             }`}
             download
@@ -64,7 +65,7 @@ export default async function Home() {
           </a>
           <a
             href={beta?.url ?? "#"}
-            className={`flex-1 inline-flex items-center justify-center gap-2 bg-yellow-400/80 hover:bg-yellow-300/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-200 ${
+            className={`flex-1 inline-flex items-center justify-center gap-2 bg-yellow-400/80 hover:bg-yellow-300/90 text-white text-lg font-semibold py-3 rounded-xl shadow-md transition-all duration-150 ${
               !beta ? "opacity-60 pointer-events-none" : ""
             }`}
             download
@@ -74,6 +75,13 @@ export default async function Home() {
           </a>
         </div>
         <ApkHistoryButton />
+        {/* New button for Live Webpages */}
+        <Link
+          href="/pages/liveweb"
+          className="w-full mt-2 px-4 py-3 rounded-xl bg-cyan-800/80 hover:bg-cyan-700/90 text-cyan-100 border border-cyan-300/30 shadow-md text-lg font-semibold text-center transition-all"
+        >
+          🌐 View Our Webpages
+        </Link>
         {/* Release Notes */}
         <div className="w-full bg-white/10 rounded-xl p-4 mt-4 border border-white/10">
           <h2 className="font-bold text-cyan-100 mb-2 text-lg">Latest updates</h2>
