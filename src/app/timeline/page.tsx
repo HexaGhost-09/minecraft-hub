@@ -1,4 +1,6 @@
 import React from "react";
+import Link from "next/link";
+import Footer from "@/app/components/Footer";
 
 type ApkAsset = {
   url: string;
@@ -35,6 +37,15 @@ export default async function TimelinePage() {
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center py-8 px-4 bg-gradient-to-br from-slate-900 via-blue-800 to-cyan-400">
+      {/* Back to Home Button */}
+      <div className="w-full max-w-2xl mb-4">
+        <Link
+          href="/"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-cyan-800/80 hover:bg-cyan-700/90 text-cyan-100 border border-cyan-300/30 shadow-sm text-sm transition-all"
+        >
+          ← Back to Home
+        </Link>
+      </div>
       <h1 className="text-3xl font-bold text-white mb-6">Minecraft APK History</h1>
       <ul className="w-full max-w-2xl space-y-4">
         {apks.map((apk) => (
@@ -58,6 +69,7 @@ export default async function TimelinePage() {
           </li>
         ))}
       </ul>
+      <Footer />
     </main>
   );
 }
