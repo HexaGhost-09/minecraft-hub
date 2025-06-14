@@ -1,8 +1,6 @@
 import Footer from "@/app/components/Footer";
 import ApkHistoryButton from "@/app/components/ApkHistoryButton";
 import HomeHeader from "@/app/components/HomeHeader";
-import Image from "next/image";
-import Link from "next/link";
 
 type ApkAsset = {
   url: string;
