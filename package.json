@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cronitorio/cronitor-rum": "^0.4.1",
     "@neondatabase/serverless": "^1.0.1",
     "concurrently": "^9.1.2",
     "next": "^15.3.3",

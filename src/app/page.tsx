@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import Footer from "@/app/components/Footer";
 
 type ApkAsset = {
   url: string;
@@ -8,10 +9,9 @@ type ApkAsset = {
 };
 
 async function getApks(): Promise<{ beta?: ApkAsset; stable?: ApkAsset }> {
-  // Fetch releases from your repo
   const res = await fetch(
     "https://api.github.com/repos/HexaGhost-09/minecraft-hub/releases",
-    { next: { revalidate: 60 } } // cache for 1 min
+    { next: { revalidate: 60 } }
   );
   const releases = await res.json();
 
@@ -31,7 +31,6 @@ async function getApks(): Promise<{ beta?: ApkAsset; stable?: ApkAsset }> {
       version: release.tag_name,
     };
 
-    // Set beta as the latest pre-release, stable as the latest non-pre-release
     if (!beta && release.prerelease) {
       beta = apkData;
     }
@@ -111,32 +110,7 @@ export default async function Home() {
           </ul>
         </div>
         {/* Footer */}
-        <footer className="pt-8 flex flex-col items-center gap-2 text-cyan-200 text-sm w-full border-t border-white/10 mt-4">
-          <div className="flex gap-3">
-            <a
-              href="https://minecraft.net"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-            >
-              Official Site
-            </a>
-            <a
-              href="https://github.com/HexaGhost-09/minecraft-hub"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:underline"
-            >
-              GitHub
-            </a>
-            <Link href="/status" className="hover:underline">
-              Status
-            </Link>
-          </div>
-          <span>
-            Made with <span className="text-pink-400">❤</span> by HexaGhost-09
-          </span>
-        </footer>
+        <Footer />
       </div>
     </main>
   );
