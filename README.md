@@ -8,15 +8,6 @@
 
 ### The Ultimate Minecraft APK Download Center
 
-English
-&nbsp;&nbsp;| &nbsp;&nbsp;
-<a href="https://github.com/HexaGhost-09/minecraft-hub/blob/main/translations/README-hi.md">हिंदी</a>
-&nbsp;&nbsp;| &nbsp;&nbsp;
-<a href="https://github.com/HexaGhost-09/minecraft-hub/blob/main/translations/README-ru.md">Русский</a>
-&nbsp;&nbsp;| &nbsp;&nbsp;
-<a href="https://github.com/HexaGhost-09/minecraft-hub/blob/main/translations/README-zh.md">中文</a>
-<!-- Add more translations as they become available -->
-
 [![Netlify Status](https://api.netlify.com/api/v1/badges/68b21e10-91e8-462b-94d2-dd19348451eb/deploy-status)](https://app.netlify.com/projects/the-minecraft-hub/deploys)
 [![GitHub Repo stars](https://img.shields.io/github/stars/HexaGhost-09/minecraft-hub?style=flat&logo=github)](https://github.com/HexaGhost-09/minecraft-hub/stargazers)
 [![GitHub forks](https://img.shields.io/github/forks/HexaGhost-09/minecraft-hub?style=flat&logo=github)](https://github.com/HexaGhost-09/minecraft-hub/network)
