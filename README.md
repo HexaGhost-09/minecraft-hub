@@ -12,6 +12,9 @@ Whenever you publish new APKs to the [Releases](https://github.com/HexaGhost-09/
 
 Below are some interactive widgets for this repository:
 
+**Deployment Status**
+[![Netlify Status](https://api.netlify.com/api/v1/badges/68b21e10-91e8-462b-94d2-dd19348451eb/deploy-status)](https://app.netlify.com/projects/the-minecraft-hub/deploys)
+
 **Stars**  
 [![GitHub Repo stars](https://img.shields.io/github/stars/HexaGhost-09/minecraft-hub?style=social)](https://github.com/HexaGhost-09/minecraft-hub/stargazers)
 
