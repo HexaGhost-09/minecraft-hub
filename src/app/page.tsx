@@ -52,11 +52,8 @@ export default async function Home() {
     <main className="min-h-screen w-full bg-gradient-to-tr from-[#1e293b] via-[#2563eb] to-[#22d3ee] flex items-center justify-center p-4">
       <div className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl shadow-2xl max-w-lg w-full px-8 py-12 flex flex-col items-center gap-6">
         <HomeHeader />
-        {/* Main Stable/Beta Buttons */}
         <MainButtons stable={stable} beta={beta} />
         <ApkHistoryButton />
-        {/* <WebViewButton /> removed */}
-        {/* Release Notes moved to QuickNotes */}
         <QuickNotes beta={beta} stable={stable} />
         <Footer />
       </div>

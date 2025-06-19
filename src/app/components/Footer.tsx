@@ -12,9 +12,14 @@ export default function Footer() {
         >
           GitHub
         </a>
-        <Link href="/status" className="hover:underline">
+        <a
+          href="https://u8.gg/do4ee"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:underline"
+        >
           Status
-        </Link>
+        </a>
       </div>
       <span>
         Made with <span className="text-pink-400">❤</span> by HexaGhost-09
