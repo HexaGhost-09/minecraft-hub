@@ -1,7 +1,6 @@
 import Footer from "@/app/components/Footer";
 import ApkHistoryButton from "@/app/components/ApkHistoryButton";
 import HomeHeader from "@/app/components/HomeHeader";
-import WebViewButton from "@/app/components/WebViewButton";
 import MainButtons from "@/app/components/MainButtons";
 import QuickNotes from "@/app/components/QuickNotes";
 
@@ -56,7 +55,7 @@ export default async function Home() {
         {/* Main Stable/Beta Buttons */}
         <MainButtons stable={stable} beta={beta} />
         <ApkHistoryButton />
-        <WebViewButton />
+        {/* <WebViewButton /> removed */}
         {/* Release Notes moved to QuickNotes */}
         <QuickNotes beta={beta} stable={stable} />
         <Footer />
