@@ -23,6 +23,7 @@
 ## 🌐 Live Websites
 
 - **Main Website:** [https://the-minecraft-hub.netlify.app](https://the-minecraft-hub.netlify.app)
+- **Sub Website:** [[https://the-minecraft-hub.netlify.app](https://the-minecraft-hub.hexaghost-09.deno.net/)]([https://the-minecraft-hub.netlify.app](https://the-minecraft-hub.hexaghost-09.deno.net/))
 - **Beta Website:** [https://beta--the-minecraft-hub.netlify.app](https://beta--the-minecraft-hub.netlify.app)
 
 ---
