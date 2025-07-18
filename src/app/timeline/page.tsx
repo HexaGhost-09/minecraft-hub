@@ -20,6 +20,22 @@ function formatFileSize(bytes: number): string {
   return `${mb.toFixed(2)} MB`;
 }
 
+async function shortenUrl(longUrl: string): Promise<string> {
+  try {
+    const res = await fetch("/api/shorten", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url: longUrl }),
+    });
+
+    const data = await res.json();
+    return data.shortenedUrl || longUrl;
+  } catch (error) {
+    console.error("Shortening failed:", error);
+    return longUrl;
+  }
+}
+
 async function fetchApks(): Promise<ApkAsset[]> {
   const res = await fetch(
     "https://api.github.com/repos/HexaGhost-09/minecraft-hub/releases"
@@ -27,11 +43,15 @@ async function fetchApks(): Promise<ApkAsset[]> {
   const releases = await res.json();
 
   const apks: ApkAsset[] = [];
+
   for (const release of releases) {
     for (const asset of release.assets) {
       if (asset.name.endsWith(".apk")) {
+        const longUrl = asset.browser_download_url;
+        const shortUrl = await shortenUrl(longUrl);
+
         apks.push({
-          url: asset.browser_download_url,
+          url: shortUrl,
           name: asset.name,
           version: release.tag_name || release.name,
           date: release.published_at,
@@ -41,7 +61,7 @@ async function fetchApks(): Promise<ApkAsset[]> {
       }
     }
   }
-  // Sort by date descending (latest first)
+
   apks.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime());
   return apks;
 }
@@ -73,7 +93,6 @@ export default function TimelinePage() {
 
   return (
     <main className="min-h-screen w-full flex flex-col items-center py-8 px-4 bg-gradient-to-br from-slate-900 via-blue-800 to-cyan-400">
-      {/* Back to Home Button */}
       <div className="w-full max-w-2xl mb-4">
         <Link
           href="/"
@@ -82,10 +101,9 @@ export default function TimelinePage() {
           ← Back to Home
         </Link>
       </div>
-      <h1 className="text-3xl font-bold text-white mb-6">
-        Minecraft APK History
-      </h1>
-      {/* Search Bar */}
+
+      <h1 className="text-3xl font-bold text-white mb-6">Minecraft APK History</h1>
+
       <div className="w-full max-w-2xl mb-6 flex items-center">
         <input
           type="text"
@@ -95,6 +113,7 @@ export default function TimelinePage() {
           className="w-full px-4 py-2 rounded-lg border border-cyan-400/30 bg-white/10 text-white placeholder:text-cyan-300 focus:outline-none focus:ring-2 focus:ring-cyan-400 transition-all"
         />
       </div>
+
       {loading ? (
         <div className="text-white text-lg">Loading...</div>
       ) : (
@@ -105,6 +124,7 @@ export default function TimelinePage() {
           {filteredApks.map((apk) => {
             const isLatestStable = latestStable && apk.url === latestStable.url;
             const isLatestBeta = latestBeta && apk.url === latestBeta.url;
+
             return (
               <li
                 key={apk.url}
@@ -136,7 +156,8 @@ export default function TimelinePage() {
                     )}
                   </div>
                   <div className="text-cyan-200 text-sm">
-                    Version: {apk.version} | Released: {new Date(apk.date).toLocaleDateString()}
+                    Version: {apk.version} | Released:{" "}
+                    {new Date(apk.date).toLocaleDateString()}
                   </div>
                   <div className="text-cyan-300 text-xs mt-1">
                     Size: {formatFileSize(apk.size)}
@@ -153,7 +174,8 @@ export default function TimelinePage() {
                       ? "bg-yellow-200 hover:bg-yellow-100 text-slate-900"
                       : "bg-green-500/80 hover:bg-green-400/90 text-white"
                   } px-6 py-2 rounded-lg font-bold transition-all`}
-                  download
+                  target="_blank"
+                  rel="noopener noreferrer"
                 >
                   ⬇️ Download
                 </a>
