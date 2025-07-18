@@ -11,7 +11,7 @@ export async function POST(req: Request) {
       shortenedUrl: data.shortenedUrl || url,
       status: data.status,
     });
-  } catch (error) {
+  } catch {
     return Response.json({ shortenedUrl: url, status: "error" });
   }
 }
