@@ -46,9 +46,9 @@
 
 ---
 
-## ⬇️ Download
+## ⬇️ Download Minecraft Now
 
-- Download the **latest Beta or Stable APK** from the [Releases page](https://github.com/HexaGhost-09/minecraft-hub/releases).
+- Download the **latest Beta or Stable APK** from the [Releases page](https://the-minecraft-hub.netlify.app).
 - Each release provides clear info about its type and version.
 
 ---
