@@ -49,11 +49,20 @@ export default async function Home() {
   const { beta, stable } = await getApks();
 
   return (
-    <main className="min-h-screen w-full bg-gradient-to-tr from-[#1e293b] via-[#2563eb] to-[#22d3ee] flex items-center justify-center p-4">
-      <div className="backdrop-blur-lg bg-white/10 border border-white/20 rounded-3xl shadow-2xl max-w-lg w-full px-8 py-12 flex flex-col items-center gap-6">
+    <main className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-cyan-600 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Subtle background animation */}
+      <div className="absolute inset-0 opacity-20">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-cyan-300 rounded-full mix-blend-multiply filter blur-xl animate-blob"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000"></div>
+        <div className="absolute top-40 left-40 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000"></div>
+      </div>
+
+      <div className="backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl shadow-xl max-w-md w-full px-6 py-8 flex flex-col items-center gap-6 relative z-10 animate-fade-in">
         <HomeHeader />
-        <MainButtons stable={stable} beta={beta} />
-        <ApkHistoryButton />
+        <div className="w-full grid grid-cols-1 gap-3"> {/* Pill-grid for buttons */}
+          <MainButtons stable={stable} beta={beta} />
+          <ApkHistoryButton />
+        </div>
         <QuickNotes beta={beta} stable={stable} />
         <Footer />
       </div>
