@@ -1,29 +1,33 @@
-import Image from "next/image";
+import Image from 'next/image';
 
 export default function HomeHeader() {
   return (
-    <div className="flex flex-col items-center gap-4 animate-slide-up">
-      {/* Logo with hover scale */}
-      <div className="relative group">
+    <header className="relative isolate flex flex-col items-center gap-5 animate-slide-up">
+      {/* Aurora background */}
+      <div className="absolute -z-10 h-64 w-64 rounded-full bg-gradient-to-tr from-cyan-400 to-blue-500 opacity-20 blur-3xl" />
+
+      {/* Logo */}
+      <div className="group relative">
         <Image
           src="https://ik.imagekit.io/dy44khd73/logo.jpg?updatedAt=1749897563233"
-          alt="Minecraft Hub Logo"
-          width={200}
-          height={200}
-          className="rounded-2xl drop-shadow-2xl transition-transform duration-300 group-hover:scale-105"
+          alt="Minecraft Hub"
+          width={160}
+          height={160}
+          className="rounded-2xl bg-white/10 backdrop-blur-md border border-white/10 shadow-lg
+                     transition-transform duration-300 group-hover:scale-105"
           priority
         />
-        <div className="absolute -inset-1 bg-gradient-to-r from-cyan-400/20 to-blue-400/20 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
       </div>
-      {/* Title */}
+
+      {/* Title block */}
       <div className="text-center">
-        <h1 className="text-3xl md:text-4xl font-black text-white tracking-tight drop-shadow-md bg-gradient-to-r from-white to-cyan-200 bg-clip-text text-transparent">
+        <h1 className="text-3xl md:text-4xl font-extrabold text-white tracking-tight">
           Minecraft Hub
         </h1>
-        <p className="text-base md:text-lg text-cyan-100 mt-1 font-medium">
+        <p className="mt-1 text-sm md:text-base text-white/70">
           Latest APKs at your fingertips
         </p>
       </div>
-    </div>
+    </header>
   );
 }
