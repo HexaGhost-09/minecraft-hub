@@ -4,7 +4,7 @@
   <img src="https://ik.imagekit.io/dy44khd73/logo.jpg?updatedAt=1749897563233" width="160" height="160" align="center" alt="Minecraft Hub Logo">
 </a>
 
-# Minecraft Hub
+# The Minecraft Hub
 
 ### The Ultimate Minecraft APK Download Center
 
