@@ -25,7 +25,6 @@
 - **Main Website:** [https://the-minecraft-hub.vercel.app/](https://the-minecraft-hub.vercel.app/)
 - **Backup Website 2:** [https://the-minecraft-hub.netlify.app](https://the-minecraft-hub.netlify.app)
 - **Backup Website 3:** [https://the-minecraft-hub.hexaghost-09.deno.net](https://the-minecraft-hub.hexaghost-09.deno.net)
-- **Beta Website:** [https://beta--the-minecraft-hub.netlify.app](https://beta--the-minecraft-hub.netlify.app)
 
 ## 📱 Screenshots
 
