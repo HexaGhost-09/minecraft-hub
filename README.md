@@ -6,17 +6,21 @@
 
 # The Minecraft Hub
 
-### The Ultimate Minecraft APK Download Center
+### The Ultimate Minecraft APK & IPA Download Center
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/68b21e10-91e8-462b-94d2-dd19348451eb/deploy-status)](https://app.netlify.com/projects/the-minecraft-hub/deploys)
 [![GitHub Repo stars](https://img.shields.io/github/stars/HexaGhost-09/minecraft-hub?style=flat&logo=github)](https://github.com/HexaGhost-09/minecraft-hub/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/HexaGhost-09/minecraft-hub?style=flat&logo=github)](https://github.com/HexaGhost-09/minecraft-hub/network)
-[![GitHub issues](https://img.shields.io/github/issues/HexaGhost-09/minecraft-hub)](https://github.com/HexaGhost-09/minecraft-hub/issues)
 [![GitHub release (latest by date)](https://img.shields.io/github/v/release/HexaGhost-09/minecraft-hub)](https://github.com/HexaGhost-09/minecraft-hub/releases)
 [![GitHub contributors](https://img.shields.io/github/contributors/HexaGhost-09/minecraft-hub)](https://github.com/HexaGhost-09/minecraft-hub/graphs/contributors)
-[![GitHub pull requests](https://img.shields.io/github/issues-pr/HexaGhost-09/minecraft-hub)](https://github.com/HexaGhost-09/minecraft-hub/pulls)
 
 </div>
+
+---
+
+## ✨ What's New
+
+> ### 🚀 iOS Support is Here!
+> We are excited to announce that **The Minecraft Hub** now supports iOS devices. You can now download `.ipa` files for your iPhone or iPad alongside our standard Android APKs.
 
 ---
 
@@ -29,34 +33,33 @@
 ## 📱 Screenshots
 
 <div align="center">
-  <img src="https://ik.imagekit.io/dy44khd73/The%20Minecraft%20Hub/Screenshot_2025-06-14-16-11-26-409-edit_com.android.chrome.jpg?updatedAt=1749897740996" width="30%" />
-  <img src="https://ik.imagekit.io/dy44khd73/The%20Minecraft%20Hub/Screenshot_2025-06-14-16-10-41-488-edit_com.android.chrome.jpg?updatedAt=1749897734862" width="30%" />
-  <!-- Add more screenshots as needed -->
+  <img src="src/app/timeline/Screenshot-2.png" width="30%" />
+  <img src="src/app/timeline/Screenshot-1.png" width="30%" />
 </div>
 
 <br>
 
 ## 📖 Features
 
-- One-click download of the latest **Minecraft APKs** (Beta & Stable) directly from [GitHub Releases](https://github.com/HexaGhost-09/minecraft-hub/releases).
-- Automatic update of download buttons and version labels — **no code changes needed**.
-- Clear distinction between **Beta** (latest) and **Stable** (previous) releases.
-- Modern, user-friendly web interface built with Next.js.
-- Open-source and community driven.
+- **Multi-Platform Support:** High-speed downloads for **Android (APK)** and now **iOS (IPA)**.
+- **One-Click Access:** Get the latest Beta & Stable versions directly from [GitHub Releases](https://github.com/HexaGhost-09/minecraft-hub/releases).
+- **Zero Maintenance UI:** Download buttons and version labels update automatically via API.
+- **Smart Labels:** Clear distinction between **Beta** (Experimental) and **Stable** (Official) releases.
+- **Modern Tech Stack:** Fast, responsive interface built with **Next.js**.
 
 ---
 
 ## ⬇️ Download Minecraft Now
 
-- Download the **latest Beta or Stable APK** from the [Releases page](https://the-minecraft-hub.netlify.app).
-- Each release provides clear info about its type and version.
+- Choose your platform (Android/iOS) and download the **latest Beta or Stable** build from the [Releases page](https://the-minecraft-hub.netlify.app).
+- Documentation for sideloading on iOS is included in the release notes.
 
 ---
 
 ## 💬 Contact
 
 - Open an [issue](https://github.com/HexaGhost-09/minecraft-hub/issues) for bug reports, feature requests, or questions.
-- Join the discussion in [GitHub Discussions](https://github.com/HexaGhost-09/minecraft-hub/discussions).
+- Join the community in [GitHub Discussions](https://github.com/HexaGhost-09/minecraft-hub/discussions).
 
 ---
 
@@ -76,6 +79,6 @@ This project is licensed under the [MIT License](https://github.com/HexaGhost-09
 
 <div align="right">
 <table><td>
-<a href="#start-of-content">👆 Scroll to top</a>
+<a href="#the-minecraft-hub">👆 Scroll to top</a>
 </td></table>
 </div>
