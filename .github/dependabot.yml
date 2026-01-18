@@ -1,0 +1,20 @@
+version: 2
+
+updates:
+  # Next.js / npm packages
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+  # GitHub Actions (Vercel actions, CI tools)
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "daily"
+
+  # C++ libraries (vcpkg)
+  - package-ecosystem: "vcpkg"
+    directory: "/"
+    schedule:
+      interval: "daily"
