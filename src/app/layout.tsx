@@ -30,10 +30,10 @@ export default function RootLayout({
       <head>
         {/* Google Analytics */}
         <Script
-          async
           src="https://www.googletagmanager.com/gtag/js?id=G-17ZBDJHQH9"
+          strategy="afterInteractive"
         />
-        <Script id="google-analytics">
+        <Script id="ga" strategy="afterInteractive">
           {`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
@@ -47,8 +47,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         {children}
-
-        {/* Vercel Analytics */}
         <Analytics />
         <SpeedInsights />
       </body>
