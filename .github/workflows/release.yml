@@ -4,7 +4,7 @@ on:
   workflow_dispatch:
     inputs:
       version_number:
-        description: 'Version Number (e.g., v1.0.0)'
+        description: 'Version (e.g., v1.0.0 or v1.0.0-beta)'
         required: true
         default: 'v1.0.0'
         type: string
@@ -25,20 +25,20 @@ jobs:
 
       - name: Download APK
         run: |
-          # We use quotes around the filename because it contains spaces
+          # The filename will include the version you typed
           curl -L -o "Minecraft Bedrock ${{ github.event.inputs.version_number }}.apk" "${{ github.event.inputs.apk_url }}"
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          # Tag and Title are now exactly the same
           tag_name: ${{ github.event.inputs.version_number }}
           name: ${{ github.event.inputs.version_number }}
-          # Description is empty
           body: ""
-          # Uses the dynamic filename with the version number
           files: "Minecraft Bedrock ${{ github.event.inputs.version_number }}.apk"
+          
+          # LOGIC: If version contains '-beta', mark as prerelease
+          prerelease: ${{ contains(github.event.inputs.version_number, '-beta') }}
+          
           draft: false
-          prerelease: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
