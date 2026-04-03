@@ -1,32 +1,40 @@
-name: Download and Release APK
+name: Manual APK Release
 
 on:
-  push:
-    tags:
-      - 'v*' # Triggers whenever you push a tag starting with 'v' (e.g., v1.0)
-  workflow_dispatch: # Allows you to run this manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      apk_url:
+        description: 'Direct URL to the APK file'
+        required: true
+        type: string
+      release_tag:
+        description: 'Tag for this release (e.g., v1.0.2)'
+        required: true
+        default: 'v1.0.0'
+        type: string
 
 jobs:
   release:
     runs-on: ubuntu-latest
     permissions:
-      contents: write # Required to create a release and upload assets
+      contents: write
 
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Download APK from URL
+      - name: Download APK from Input URL
         run: |
-          # Replace the URL below with your actual APK download link
-          curl -L -o "minecraft-hub.apk" "https://example.com/path/to/your/file.apk"
+          # We use the input from the UI here
+          curl -L -o "app-release.apk" "${{ github.event.inputs.apk_url }}"
 
-      - name: Create GitHub Release and Upload APK
+      - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
         with:
-          files: minecraft-hub.apk
-          tag_name: ${{ github.ref_name }}
-          name: Release ${{ github.ref_name }}
+          files: app-release.apk
+          tag_name: ${{ github.event.inputs.release_tag }}
+          name: Release ${{ github.event.inputs.release_tag }}
+          body: "Automated release of APK downloaded from: ${{ github.event.inputs.apk_url }}"
           draft: false
           prerelease: false
         env:
