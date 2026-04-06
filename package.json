@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@cronitorio/cronitor-rum": "^0.4.1",
+    "@cronitorio/cronitor-rum": "^0.4.2",
     "@neondatabase/serverless": "^1.0.2",
     "@vercel/analytics": "^2.0.1",
     "@vercel/blob": "^2.3.2",
