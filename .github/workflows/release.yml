@@ -1,4 +1,4 @@
-name: Manual APK Release
+name: Manual File Release
 
 on:
   workflow_dispatch:
@@ -8,8 +8,8 @@ on:
         required: true
         default: 'v1.0.0'
         type: string
-      apk_url:
-        description: 'Direct URL to the APK'
+      file_url:
+        description: 'Direct URL to the APK or IPA'
         required: true
         type: string
 
@@ -23,18 +23,32 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Download APK
+      - name: Determine File Extension and Download
         run: |
-          # The filename will include the version you typed
-          curl -L -o "Minecraft Bedrock ${{ github.event.inputs.version_number }}.apk" "${{ github.event.inputs.apk_url }}"
+          URL="${{ github.event.inputs.file_url }}"
+          
+          # Check if the URL contains .ipa, otherwise default to .apk
+          if [[ "$URL" == *".ipa"* ]]; then
+            EXT="ipa"
+          else
+            EXT="apk"
+          fi
+          
+          FILENAME="Minecraft Bedrock ${{ github.event.inputs.version_number }}.$EXT"
+          
+          # Save the filename to GitHub ENV so the next step can use it
+          echo "FILE_NAME=$FILENAME" >> $GITHUB_ENV
+          
+          # Download the file with the correct extension
+          curl -L -o "$FILENAME" "$URL"
 
-      - name: Create GitHub Release
+      - name: Create or Update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.version_number }}
           name: ${{ github.event.inputs.version_number }}
-          body: ""
-          files: "Minecraft Bedrock ${{ github.event.inputs.version_number }}.apk"
+          # Use the environment variable we set in the previous step
+          files: ${{ env.FILE_NAME }}
           
           # LOGIC: If version contains '-beta', mark as prerelease
           prerelease: ${{ contains(github.event.inputs.version_number, '-beta') }}
