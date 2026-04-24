@@ -23,36 +23,54 @@ jobs:
       - name: Checkout Code
         uses: actions/checkout@v4
 
-      - name: Determine File Extension and Download
+      - name: Download File & Generate Fancy Release Notes
         run: |
           URL="${{ github.event.inputs.file_url }}"
           
-          # Check if the URL contains .ipa, otherwise default to .apk
+          # Check extension and set platform name
           if [[ "$URL" == *".ipa"* ]]; then
             EXT="ipa"
+            PLATFORM="iOS"
           else
             EXT="apk"
+            PLATFORM="Android"
           fi
           
           FILENAME="Minecraft Bedrock ${{ github.event.inputs.version_number }}.$EXT"
-          
-          # Save the filename to GitHub ENV so the next step can use it
           echo "FILE_NAME=$FILENAME" >> $GITHUB_ENV
           
-          # Download the file with the correct extension
+          # 1. Download the file
           curl -L -o "$FILENAME" "$URL"
+          
+          # 2. Calculate Fancy Details
+          FILE_SIZE=$(ls -lh "$FILENAME" | awk '{print $5}')
+          SHA256=$(sha256sum "$FILENAME" | awk '{print $1}')
+          UPLOAD_DATE=$(date -u +"%B %d, %Y at %H:%M UTC")
+          
+          # 3. Create the Markdown body for this specific file
+          cat <<EOF > release_notes.md
+          
+          ### 📦 Uploaded File: \`$FILENAME\`
+          - **Platform:** $PLATFORM
+          - **File Size:** \`$FILE_SIZE\`
+          - **SHA-256:** \`$SHA256\`
+          - **Uploaded:** $UPLOAD_DATE
+          
+          EOF
 
       - name: Create or Update GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.event.inputs.version_number }}
           name: ${{ github.event.inputs.version_number }}
-          # Use the environment variable we set in the previous step
           files: ${{ env.FILE_NAME }}
           
-          # LOGIC: If version contains '-beta', mark as prerelease
-          prerelease: ${{ contains(github.event.inputs.version_number, '-beta') }}
+          # Point the body to our generated markdown file
+          body_path: release_notes.md
+          # This tells GitHub to ADD these notes to the existing release, not overwrite!
+          append_body: true 
           
+          prerelease: ${{ contains(github.event.inputs.version_number, '-beta') }}
           draft: false
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
