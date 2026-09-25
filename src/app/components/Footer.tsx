@@ -20,7 +20,7 @@ export default function Footer() {
           </svg>
         </Link>
         <Link
-          href="https://u8.gg/do4ee"
+          href="https://wayp0int.instatus.com/"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Status Page"
