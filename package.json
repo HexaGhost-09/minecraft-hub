@@ -9,25 +9,25 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@cronitorio/cronitor-rum": "^0.4.1",
+    "@cronitorio/cronitor-rum": "^0.4.2",
     "@neondatabase/serverless": "^1.0.2",
     "@vercel/analytics": "^2.0.1",
     "@vercel/blob": "^2.3.2",
     "@vercel/speed-insights": "^2.0.0",
     "concurrently": "^9.2.1",
     "lucide-react": "^1.7.0",
-    "next": "^16.2.1",
+    "next": "^16.3.6",
     "react": "^19.2.3",
     "react-dom": "^19.2.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
-    "@types/node": "^25",
+    "@types/node": "^26.6.2",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^10",
-    "eslint-config-next": "^16.2.1",
+    "eslint-config-next": "^16.3.6",
     "tailwindcss": "^4",
     "typescript": "^6"
   }
