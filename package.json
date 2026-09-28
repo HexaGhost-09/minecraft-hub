@@ -14,7 +14,7 @@
     "@vercel/analytics": "^2.0.1",
     "@vercel/blob": "^2.3.2",
     "@vercel/speed-insights": "^2.0.0",
-    "concurrently": "^9.2.1",
+    "concurrently": "^10.0.5",
     "lucide-react": "^1.7.0",
     "next": "^16.2.2",
     "react": "^19.2.3",
