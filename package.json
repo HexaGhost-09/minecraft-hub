@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@cronitorio/cronitor-rum": "^0.4.2",
-    "@neondatabase/serverless": "^1.0.2",
+    "@neondatabase/serverless": "^1.1.0",
     "@vercel/analytics": "^2.0.1",
     "@vercel/blob": "^2.3.2",
     "@vercel/speed-insights": "^2.0.0",
